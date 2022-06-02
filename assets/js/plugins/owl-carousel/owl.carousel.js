@@ -9,9 +9,9 @@ if (typeof Object.create !== "function") {
 }
 (function ($, window, document) {
 
-    let Carousel = {
+    var Carousel = {
         init : function (options, el) {
-            let base = this;
+            var base = this;
 
             base.$elem = $(el);
             base.options = $.extend({}, $.fn.owlCarousel.options, base.$elem.data(), options);
@@ -21,10 +21,10 @@ if (typeof Object.create !== "function") {
         },
 
         loadContent : function () {
-            let base = this, url;
+            var base = this, url;
 
             function getData(data) {
-                let i, content = "";
+                var i, content = "";
                 if (typeof base.options.jsonSuccess === "function") {
                     base.options.jsonSuccess.apply(this, [data]);
                 } else {
@@ -51,7 +51,7 @@ if (typeof Object.create !== "function") {
         },
 
         logIn : function () {
-            let base = this;
+            var base = this;
 
             base.$elem.data("owl-originalStyles", base.$elem.attr("style"));
             base.$elem.data("owl-originalClasses", base.$elem.attr("class"));
@@ -65,7 +65,7 @@ if (typeof Object.create !== "function") {
         },
 
         setVars : function () {
-            let base = this;
+            var base = this;
             if (base.$elem.children().length === 0) {return false; }
             base.baseClass();
             base.eventTypes();
@@ -83,7 +83,7 @@ if (typeof Object.create !== "function") {
         },
 
         onStartup : function () {
-            let base = this;
+            var base = this;
             base.updateItems();
             base.calculateAll();
             base.buildControls();
@@ -116,7 +116,7 @@ if (typeof Object.create !== "function") {
         },
 
         eachMoveUpdate : function () {
-            let base = this;
+            var base = this;
 
             if (base.options.lazyLoad === true) {
                 base.lazyLoad();
@@ -132,7 +132,7 @@ if (typeof Object.create !== "function") {
         },
 
         updateVars : function () {
-            let base = this;
+            var base = this;
             if (typeof base.options.beforeUpdate === "function") {
                 base.options.beforeUpdate.apply(this, [base.$elem]);
             }
@@ -148,14 +148,14 @@ if (typeof Object.create !== "function") {
         },
 
         reload : function () {
-            let base = this;
+            var base = this;
             window.setTimeout(function () {
                 base.updateVars();
             }, 0);
         },
 
         watchVisibility : function () {
-            let base = this;
+            var base = this;
 
             if (base.$elem.is(":visible") === false) {
                 base.$elem.css({opacity: 0});
@@ -174,7 +174,7 @@ if (typeof Object.create !== "function") {
         },
 
         wrapItems : function () {
-            let base = this;
+            var base = this;
             base.$userItems.wrapAll("<div class=\"owl-wrapper\">").wrap("<div class=\"owl-item\"></div>");
             base.$elem.find(".owl-wrapper").wrap("<div class=\"owl-wrapper-outer\">");
             base.wrapperOuter = base.$elem.find(".owl-wrapper-outer");
@@ -182,7 +182,7 @@ if (typeof Object.create !== "function") {
         },
 
         baseClass : function () {
-            let base = this,
+            var base = this,
                 hasBaseClass = base.$elem.hasClass(base.options.baseClass),
                 hasThemeClass = base.$elem.hasClass(base.options.theme);
 
@@ -196,7 +196,7 @@ if (typeof Object.create !== "function") {
         },
 
         updateItems : function () {
-            let base = this, width, i;
+            var base = this, width, i;
 
             if (base.options.responsive === false) {
                 return false;
@@ -206,7 +206,7 @@ if (typeof Object.create !== "function") {
                 base.options.itemsCustom = false;
                 base.options.itemsDesktop = false;
                 base.options.itemsDesktopSmall = false;
-                base.options.itemsTablet = false;
+                base.options.itemsTabvar = false;
                 base.options.itemsTabletSmall = false;
                 base.options.itemsMobile = false;
                 return false;
@@ -237,7 +237,7 @@ if (typeof Object.create !== "function") {
                     base.options.items = base.options.itemsDesktopSmall[1];
                 }
 
-                if (width <= base.options.itemsTablet[0] && base.options.itemsTablet !== false) {
+                if (width <= base.options.itemsTablet[0] && base.options.itemsTabvar !== false) {
                     base.options.items = base.options.itemsTablet[1];
                 }
 
@@ -257,7 +257,7 @@ if (typeof Object.create !== "function") {
         },
 
         response : function () {
-            let base = this,
+            var base = this,
                 smallDelay,
                 lastWindowWidth;
 
@@ -282,7 +282,7 @@ if (typeof Object.create !== "function") {
         },
 
         updatePosition : function () {
-            let base = this;
+            var base = this;
             base.jumpTo(base.currentItem);
             if (base.options.autoPlay !== false) {
                 base.checkAp();
@@ -290,12 +290,12 @@ if (typeof Object.create !== "function") {
         },
 
         appendItemsSizes : function () {
-            let base = this,
+            var base = this,
                 roundPages = 0,
                 lastItem = base.itemsAmount - base.options.items;
 
             base.$owlItems.each(function (index) {
-                let $this = $(this);
+                var $this = $(this);
                 $this
                     .css({"width": base.itemWidth})
                     .data("owl-item", Number(index));
@@ -310,7 +310,7 @@ if (typeof Object.create !== "function") {
         },
 
         appendWrapperSizes : function () {
-            let base = this,
+            var base = this,
                 width = base.$owlItems.length * base.itemWidth;
 
             base.$owlWrapper.css({
@@ -321,7 +321,7 @@ if (typeof Object.create !== "function") {
         },
 
         calculateAll : function () {
-            let base = this;
+            var base = this;
             base.calculateWidth();
             base.appendWrapperSizes();
             base.loops();
@@ -329,12 +329,12 @@ if (typeof Object.create !== "function") {
         },
 
         calculateWidth : function () {
-            let base = this;
+            var base = this;
             base.itemWidth = Math.round(base.$elem.width() / base.options.items);
         },
 
         max : function () {
-            let base = this,
+            var base = this,
                 maximum = ((base.itemsAmount * base.itemWidth) - base.options.items * base.itemWidth) * -1;
             if (base.options.items > base.itemsAmount) {
                 base.maximumItem = 0;
@@ -352,7 +352,7 @@ if (typeof Object.create !== "function") {
         },
 
         loops : function () {
-            let base = this,
+            var base = this,
                 prev = 0,
                 elWidth = 0,
                 i,
@@ -378,7 +378,7 @@ if (typeof Object.create !== "function") {
         },
 
         buildControls : function () {
-            let base = this;
+            var base = this;
             if (base.options.navigation === true || base.options.pagination === true) {
                 base.owlControls = $("<div class=\"owl-controls\"/>").toggleClass("clickable", !base.browser.isTouch).appendTo(base.$elem);
             }
@@ -391,7 +391,7 @@ if (typeof Object.create !== "function") {
         },
 
         buildButtons : function () {
-            let base = this,
+            var base = this,
                 buttonsWrapper = $("<div class=\"owl-buttons\"/>");
             base.owlControls.append(buttonsWrapper);
 
@@ -424,7 +424,7 @@ if (typeof Object.create !== "function") {
         },
 
         buildPagination : function () {
-            let base = this;
+            var base = this;
 
             base.paginationWrapper = $("<div class=\"owl-pagination\"/>");
             base.owlControls.append(base.paginationWrapper);
@@ -438,7 +438,7 @@ if (typeof Object.create !== "function") {
         },
 
         updatePagination : function () {
-            let base = this,
+            var base = this,
                 counter,
                 lastPage,
                 lastItem,
@@ -479,7 +479,7 @@ if (typeof Object.create !== "function") {
             base.checkPagination();
         },
         checkPagination : function () {
-            let base = this;
+            var base = this;
             if (base.options.pagination === false) {
                 return false;
             }
@@ -494,7 +494,7 @@ if (typeof Object.create !== "function") {
         },
 
         checkNavigation : function () {
-            let base = this;
+            var base = this;
 
             if (base.options.navigation === false) {
                 return false;
@@ -517,7 +517,7 @@ if (typeof Object.create !== "function") {
         },
 
         updateControls : function () {
-            let base = this;
+            var base = this;
             base.updatePagination();
             base.checkNavigation();
             if (base.owlControls) {
@@ -530,14 +530,14 @@ if (typeof Object.create !== "function") {
         },
 
         destroyControls : function () {
-            let base = this;
+            var base = this;
             if (base.owlControls) {
                 base.owlControls.remove();
             }
         },
 
         next : function (speed) {
-            let base = this;
+            var base = this;
 
             if (base.isTransition) {
                 return false;
@@ -557,7 +557,7 @@ if (typeof Object.create !== "function") {
         },
 
         prev : function (speed) {
-            let base = this;
+            var base = this;
 
             if (base.isTransition) {
                 return false;
@@ -581,7 +581,7 @@ if (typeof Object.create !== "function") {
         },
 
         goTo : function (position, speed, drag) {
-            let base = this,
+            var base = this,
                 goToPixel;
 
             if (base.isTransition) {
@@ -645,7 +645,7 @@ if (typeof Object.create !== "function") {
         },
 
         jumpTo : function (position) {
-            let base = this;
+            var base = this;
             if (typeof base.options.beforeMove === "function") {
                 base.options.beforeMove.apply(this, [base.$elem]);
             }
@@ -665,7 +665,7 @@ if (typeof Object.create !== "function") {
         },
 
         afterGo : function () {
-            let base = this;
+            var base = this;
 
             base.prevArr.push(base.currentItem);
             base.prevItem = base.owl.prevItem = base.prevArr[base.prevArr.length - 2];
@@ -686,20 +686,20 @@ if (typeof Object.create !== "function") {
         },
 
         stop : function () {
-            let base = this;
+            var base = this;
             base.apStatus = "stop";
             window.clearInterval(base.autoPlayInterval);
         },
 
         checkAp : function () {
-            let base = this;
+            var base = this;
             if (base.apStatus !== "stop") {
                 base.play();
             }
         },
 
         play : function () {
-            let base = this;
+            var base = this;
             base.apStatus = "play";
             if (base.options.autoPlay === false) {
                 return false;
@@ -711,7 +711,7 @@ if (typeof Object.create !== "function") {
         },
 
         swapSpeed : function (action) {
-            let base = this;
+            var base = this;
             if (action === "slideSpeed") {
                 base.$owlWrapper.css(base.addCssSpeed(base.options.slideSpeed));
             } else if (action === "paginationSpeed") {
@@ -750,17 +750,17 @@ if (typeof Object.create !== "function") {
         },
 
         transition3d : function (value) {
-            let base = this;
+            var base = this;
             base.$owlWrapper.css(base.doTranslate(value));
         },
 
         css2move : function (value) {
-            let base = this;
+            var base = this;
             base.$owlWrapper.css({"left" : value});
         },
 
         css2slide : function (value, speed) {
-            let base = this;
+            var base = this;
 
             base.isCssFinish = false;
             base.$owlWrapper.stop(true, true).animate({
@@ -774,7 +774,7 @@ if (typeof Object.create !== "function") {
         },
 
         checkBrowser : function () {
-            let base = this,
+            var base = this,
                 translate3D = "translate3d(0px, 0px, 0px)",
                 tempElem = document.createElement("div"),
                 regex,
@@ -800,7 +800,7 @@ if (typeof Object.create !== "function") {
         },
 
         moveEvents : function () {
-            let base = this;
+            var base = this;
             if (base.options.mouseDrag !== false || base.options.touchDrag !== false) {
                 base.gestures();
                 base.disabledEvents();
@@ -808,7 +808,7 @@ if (typeof Object.create !== "function") {
         },
 
         eventTypes : function () {
-            let base = this,
+            var base = this,
                 types = ["s", "e", "x"];
 
             base.ev_types = {};
@@ -839,7 +839,7 @@ if (typeof Object.create !== "function") {
         },
 
         disabledEvents :  function () {
-            let base = this;
+            var base = this;
             base.$elem.on("dragstart.owl", function (event) { event.preventDefault(); });
             base.$elem.on("mousedown.disableTextSelect", function (e) {
                 return $(e.target).is('input, textarea, select, option');
@@ -848,7 +848,7 @@ if (typeof Object.create !== "function") {
 
         gestures : function () {
             /*jslint unparam: true*/
-            let base = this,
+            var base = this,
                 locals = {
                     offsetX : 0,
                     offsetY : 0,
@@ -899,7 +899,7 @@ if (typeof Object.create !== "function") {
             }
 
             function dragStart(event) {
-                let ev = event.originalEvent || event || window.event,
+                var ev = event.originalEvent || event || window.event,
                     position;
 
                 if (ev.which === 3) {
@@ -941,7 +941,7 @@ if (typeof Object.create !== "function") {
             }
 
             function dragMove(event) {
-                let ev = event.originalEvent || event || window.event,
+                var ev = event.originalEvent || event || window.event,
                     minSwipe,
                     maxSwipe;
 
@@ -984,7 +984,7 @@ if (typeof Object.create !== "function") {
             }
 
             function dragEnd(event) {
-                let ev = event.originalEvent || event || window.event,
+                var ev = event.originalEvent || event || window.event,
                     newPosition,
                     handlers,
                     owlStopEvent;
@@ -1024,7 +1024,7 @@ if (typeof Object.create !== "function") {
         },
 
         getNewPosition : function () {
-            let base = this,
+            var base = this,
                 newPosition = base.closestItem();
 
             if (newPosition > base.maximumItem) {
@@ -1037,7 +1037,7 @@ if (typeof Object.create !== "function") {
             return newPosition;
         },
         closestItem : function () {
-            let base = this,
+            var base = this,
                 array = base.options.scrollPerPage === true ? base.pagesInArray : base.positionsInArray,
                 goal = base.newPosX,
                 closest = null;
@@ -1064,7 +1064,7 @@ if (typeof Object.create !== "function") {
         },
 
         moveDirection : function () {
-            let base = this,
+            var base = this,
                 direction;
             if (base.newRelativeX < 0) {
                 direction = "right";
@@ -1078,7 +1078,7 @@ if (typeof Object.create !== "function") {
 
         customEvents : function () {
             /*jslint unparam: true*/
-            let base = this;
+            var base = this;
             base.$elem.on("owl.next", function () {
                 base.next();
             });
@@ -1103,7 +1103,7 @@ if (typeof Object.create !== "function") {
         },
 
         stopOnHover : function () {
-            let base = this;
+            var base = this;
             if (base.options.stopOnHover === true && base.browser.isTouch !== true && base.options.autoPlay !== false) {
                 base.$elem.on("mouseover", function () {
                     base.stop();
@@ -1117,7 +1117,7 @@ if (typeof Object.create !== "function") {
         },
 
         lazyLoad : function () {
-            let base = this,
+            var base = this,
                 i,
                 $item,
                 itemNumber,
@@ -1157,7 +1157,7 @@ if (typeof Object.create !== "function") {
         },
 
         lazyPreload : function ($item, $lazyImg) {
-            let base = this,
+            var base = this,
                 iterations = 0,
                 isBackgroundImg;
 
@@ -1196,12 +1196,12 @@ if (typeof Object.create !== "function") {
         },
 
         autoHeight : function () {
-            let base = this,
+            var base = this,
                 $currentimg = $(base.$owlItems[base.currentItem]).find("img"),
                 iterations;
 
             function addHeight() {
-                let $currentItem = $(base.$owlItems[base.currentItem]).height();
+                var $currentItem = $(base.$owlItems[base.currentItem]).height();
                 base.wrapperOuter.css("height", $currentItem + "px");
                 if (!base.wrapperOuter.hasClass("autoHeight")) {
                     window.setTimeout(function () {
@@ -1230,7 +1230,7 @@ if (typeof Object.create !== "function") {
         },
 
         completeImg : function (img) {
-            let naturalWidthType;
+            var naturalWidthType;
 
             if (!img.complete) {
                 return false;
@@ -1243,7 +1243,7 @@ if (typeof Object.create !== "function") {
         },
 
         onVisibleItems : function () {
-            let base = this,
+            var base = this,
                 i;
 
             if (base.options.addClassActive === true) {
@@ -1261,14 +1261,14 @@ if (typeof Object.create !== "function") {
         },
 
         transitionTypes : function (className) {
-            let base = this;
+            var base = this;
             //Currently available: "fade", "backSlide", "goDown", "fadeUp"
             base.outClass = "owl-" + className + "-out";
             base.inClass = "owl-" + className + "-in";
         },
 
         singleItemTransition : function () {
-            let base = this,
+            var base = this,
                 outClass = base.outClass,
                 inClass = base.inClass,
                 $currentItem = base.$owlItems.eq(base.currentItem),
@@ -1312,7 +1312,7 @@ if (typeof Object.create !== "function") {
         },
 
         clearTransStyle : function (item, classToRemove) {
-            let base = this;
+            var base = this;
             item.css({
                 "position" : "",
                 "left" : ""
@@ -1327,7 +1327,7 @@ if (typeof Object.create !== "function") {
         },
 
         owlStatus : function () {
-            let base = this;
+            var base = this;
             base.owl = {
                 "userOptions"   : base.userOptions,
                 "baseElement"   : base.$elem,
@@ -1343,14 +1343,14 @@ if (typeof Object.create !== "function") {
         },
 
         clearEvents : function () {
-            let base = this;
+            var base = this;
             base.$elem.off(".owl owl mousedown.disableTextSelect");
             $(document).off(".owl owl");
             $(window).off("resize", base.resizer);
         },
 
         unWrap : function () {
-            let base = this;
+            var base = this;
             if (base.$elem.children().length !== 0) {
                 base.$owlWrapper.unwrap();
                 base.$userItems.unwrap().unwrap();
@@ -1365,7 +1365,7 @@ if (typeof Object.create !== "function") {
         },
 
         destroy : function () {
-            let base = this;
+            var base = this;
             base.stop();
             window.clearInterval(base.checkVisible);
             base.unWrap();
@@ -1373,14 +1373,14 @@ if (typeof Object.create !== "function") {
         },
 
         reinit : function (newOptions) {
-            let base = this,
+            var base = this,
                 options = $.extend({}, base.userOptions, newOptions);
             base.unWrap();
             base.init(options, base.$elem);
         },
 
         addItem : function (htmlString, targetPosition) {
-            let base = this,
+            var base = this,
                 position;
 
             if (!htmlString) {return false; }
@@ -1406,7 +1406,7 @@ if (typeof Object.create !== "function") {
         },
 
         removeItem : function (targetPosition) {
-            let base = this,
+            var base = this,
                 position;
 
             if (base.$elem.children().length === 0) {
@@ -1431,7 +1431,7 @@ if (typeof Object.create !== "function") {
                 return false;
             }
             $(this).data("owl-init", true);
-            let carousel = Object.create(Carousel);
+            var carousel = Object.create(Carousel);
             carousel.init(options, this);
             $.data(this, "owlCarousel", carousel);
         });
@@ -1443,7 +1443,7 @@ if (typeof Object.create !== "function") {
         itemsCustom : false,
         itemsDesktop : [1199, 4],
         itemsDesktopSmall : [979, 3],
-        itemsTablet : [768, 2],
+        itemsTabvar : [768, 2],
         itemsTabletSmall : false,
         itemsMobile : [479, 1],
         singleItem : false,

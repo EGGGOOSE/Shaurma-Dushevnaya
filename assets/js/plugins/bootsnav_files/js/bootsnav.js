@@ -1,7 +1,7 @@
 (function ($) {
 	"use strict";
     
-    let bootsnav = {
+    var bootsnav = {
         initialize: function() {
             this.event();
             this.hoverDropdown();
@@ -11,10 +11,10 @@
         event : function(){
             
        
-            let getNav = $("nav.navbar.bootsnav");
+            var getNav = $("nav.navbar.bootsnav");
             
             
-            let navSticky = getNav.hasClass("navbar-sticky");
+            var navSticky = getNav.hasClass("navbar-sticky");
             if( navSticky ){
                 
                 getNav.wrap("<div class='wrap-sticky'></div>");
@@ -22,7 +22,7 @@
             
           
             if( getNav.hasClass("brand-center")){                
-                let postsArr = new Array(),
+                var postsArr = new Array(),
                     index = $("nav.brand-center"),
                     $postsList = index.find('ul.navbar-nav');
 
@@ -32,13 +32,13 @@
                 });
                 
                
-                let firstList = postsArr.splice(0, Math.round(postsArr.length / 2)),
+                var firstList = postsArr.splice(0, Math.round(postsArr.length / 2)),
                     secondList = postsArr,
                     ListHTML = '';
                 
-                let createHTML = function(list){
+                var createHTML = function(list){
                     ListHTML = '';
-                    for (let i = 0; i < list.length; i++) {
+                    for (var i = 0; i < list.length; i++) {
                         ListHTML += '<li>' + list[i] + '</li>'
                     }
                 }
@@ -60,7 +60,7 @@
                 
                
                 index.find('ul.navbar-nav > li').each(function(){ 
-                    let dropDown = $("ul.dropdown-menu", this),
+                    var dropDown = $("ul.dropdown-menu", this),
                         megaMenu = $("ul.megamenu-content", this);
                     dropDown.closest("li").addClass("dropdown");
                     megaMenu.closest("li").addClass("megamenu-fw");
@@ -112,7 +112,7 @@
             
             if( getNav.hasClass("no-background")){
                 $(window).on("scroll", function(){
-                    let scrollTop = $(window).scrollTop();
+                    var scrollTop = $(window).scrollTop();
                     if(scrollTop >34){
                         $(".navbar-fixed").removeClass("no-background");
                     }else {
@@ -124,7 +124,7 @@
            
             if( getNav.hasClass("navbar-transparent")){
                 $(window).on("scroll", function(){
-                    let scrollTop = $(window).scrollTop();
+                    var scrollTop = $(window).scrollTop();
                     if(scrollTop >34){
                         $(".navbar-fixed").removeClass("navbar-transparent");
                     }else {
@@ -169,7 +169,7 @@
 
       
         hoverDropdown : function(){
-            let getNav = $("nav.navbar.bootsnav"),
+            var getNav = $("nav.navbar.bootsnav"),
                 getWindow = $(window).width(),
                 getHeight = $(window).height(),
                 getIn = getNav.find("ul.nav").data("in"),
@@ -230,7 +230,7 @@
                 }); 
                 
               
-                let cleanOpen = function(){
+                var cleanOpen = function(){
                     $('li.dropdown', this).removeClass("on");
                     $(".dropdown-menu", this).stop().fadeOut();
                     $(".dropdown-menu", this).removeClass(getIn);
@@ -386,7 +386,7 @@
             
           
             if( getNav.hasClass("navbar-full")){
-                let windowHeight = $(window).height(),
+                var windowHeight = $(window).height(),
                     windowWidth =  $(window).width();
 
                 $(".nav-full").css("height", windowHeight + "px");
@@ -395,7 +395,7 @@
                 
                 $(".navbar-collapse").addClass("animated");
                 $(".navbar-toggle").each(function(){
-                    let getId = $(this).data("target");
+                    var getId = $(this).data("target");
                     $(this).off("click");
                     $(this).on("click", function(e){
                         e.preventDefault();
@@ -420,19 +420,19 @@
         
        
         navbarSticky : function(){  
-            let getNav = $("nav.navbar.bootsnav"),
+            var getNav = $("nav.navbar.bootsnav"),
                 navSticky = getNav.hasClass("navbar-sticky");
             
             if( navSticky ){
                 
                 // Set Height Navigation
-                let getHeight = getNav.height();             
+                var getHeight = getNav.height();             
                 $(".wrap-sticky").height(getHeight);
                 
                 // Windown on scroll
-                let getOffset = $(".wrap-sticky").offset().top;
+                var getOffset = $(".wrap-sticky").offset().top;
                 $(window).on("scroll", function(){  
-                    let scrollTop = $(window).scrollTop();
+                    var scrollTop = $(window).scrollTop();
                     if(scrollTop > getOffset){
                         getNav.addClass("sticked");
                     }else {
@@ -443,7 +443,7 @@
         },
         
         navbarScrollspy : function(){ 
-            let navScrollSpy = $(".navbar-scrollspy"),
+            var navScrollSpy = $(".navbar-scrollspy"),
                 $body   = $('body'), 
                 getNav = $('nav.navbar.bootsnav'),
                 offset  = getNav.outerHeight();
@@ -469,7 +469,7 @@
                     });
 
                    
-                    let scrollTop = $(window).scrollTop(),
+                    var scrollTop = $(window).scrollTop(),
                         $anchor = $(this).find('a'),
                         $section = $($anchor.attr('href')).offset().top,
                         $window = $(window).width(),
@@ -478,9 +478,9 @@
                         $speed = getNav.data("speed");
                     
                     if( $window > 992 ){
-                        let $position = $section - $minusDesktop;
+                        var $position = $section - $minusDesktop;
                     }else{
-                        let $position = $section - $minusMobile;
+                        var $position = $section - $minusMobile;
                     }             
                         
                     $('html, body').stop().animate({
@@ -489,8 +489,8 @@
                 });
                 
                
-                let fixSpy = function() {
-                    let data = $body.data('bs.scrollspy');
+                var fixSpy = function() {
+                    var data = $body.data('bs.scrollspy');
                     if (data) {
                         offset = getNav.outerHeight();
                         data.options.offset = offset;
@@ -500,10 +500,10 @@
                 }
                 
                
-                let resizeTimer;
+                var resizeTimer;
                 $(window).on('resize', function() {
                     clearTimeout(resizeTimer);
-                    let resizeTimer = setTimeout(fixSpy, 200);
+                    var resizeTimer = setTimeout(fixSpy, 200);
                 });
             }
         }
